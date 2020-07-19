@@ -4,10 +4,7 @@ A simple TicTacToe game made with Python.
 
 Position/Indexes on the board are numbered followingly: 
 
- 1|2|3
- -----
- 4|5|6
- -----
+![Image of Yaktocat](https://innerpiecesgallery.com/wp-content/uploads/Tic-Tac-Toe-Grid-Numbers.jpg)
  
  
 Developed by: Daoud Ali
