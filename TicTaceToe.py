@@ -1,4 +1,4 @@
-#Daoud Ali Simple TicTacToe Python Game
+#Simple TicTacToe Python Game
 
 #Create function to display game board
 
