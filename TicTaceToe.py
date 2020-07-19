@@ -1,11 +1,9 @@
 #Daoud Ali Simple TicTacToe Python Game
 
 #Create function to display game board
-from IPython.display import clear_output
 
 def display_board(board):
-    
-    clear_output()
+
     print(board[1] +" | "+ board[2] + " | " + board[3])
     print("---------")
     print(board[4] +" | "+ board[5] + " | " + board[6])
@@ -51,7 +49,7 @@ def win_check(board, marker):
         return True
     elif (board[3] == marker and board[6] == marker and board[9] == marker):
         return True 
-    elif (board[2] == marker and board[4] == marker and board[8] == marker):
+    elif (board[2] == marker and board[5] == marker and board[8] == marker):
         return True
     elif (board[1] == marker and board[4] == marker and board[7] == marker):
         return True 
@@ -66,22 +64,26 @@ def choose_first():
     x = random.randint(1,10)            # Choose a number between 1 and 10 inclusive (5 odd, 5 even numbers)
     if x % 2 == 0:                      # If random num even then player 1 goes first
         print("Player 1 goes first!")
+        return("Player 1")
     else:
         print("Player 2 goes first!")
+        return("Player 2")
 
 #Function to check if space is free on board
 def space_check(board, position):
 
-    if board[position] != "#":
+    if board[position] != " ":
         print("Sorry! The chosen position is not vacant.")
         return False
+    else:
+        return True
 
 #Funciton to check if board is full
 def full_board_check(board):
 
     full = True                 # Assume board is full
     for pos in range(1,10):
-        if board[pos] == "#":   # If vacant position found, set full equal to False
+        if board[pos] == " ":   # If vacant position found, set full equal to False
             full = False
     return full
 
@@ -98,5 +100,54 @@ def replay():
 
     return input('Play again? Enter Yes or No: ').lower().startswith('y')
 
-#Game Logic Functions
+#Game Logic 
 print("Let's Play Tic-Tac-Toe! By Daoud Ali.")
+
+while True:
+
+    gameboard = [" "," "," "," "," "," "," "," "," "," "]       #Create empty board
+    marker1, marker2 = player_choice()                          #Choose Player Markers
+    turn = choose_first()                                       #Choose first player
+    game_on = True
+
+    while game_on:
+        if turn == 'Player 1':
+            # Player1's turn.
+            
+            display_board(gameboard)
+            position = choose_pos(gameboard)
+            place_marker(gameboard, marker1, position)
+
+            if win_check(gameboard, marker1):
+                display_board(gameboard)
+                print('Congratulations! You have won the game!')
+                game_on = False
+            else:
+                if full_board_check(gameboard):
+                    display_board(gameboard)
+                    print('The game is a draw!')
+                    break
+                else:
+                    turn = 'Player 2'
+
+        else:
+            
+            
+            display_board(gameboard)
+            position = choose_pos(gameboard)
+            place_marker(gameboard, marker2, position)
+
+            if win_check(gameboard, marker2):
+                display_board(gameboard)
+                print('Player 2 has won!')
+                game_on = False
+            else:
+                if full_board_check(gameboard):
+                    display_board(gameboard)
+                    print('The game is a draw!')
+                    break
+                else:
+                    turn = 'Player 1'
+
+    if not replay():
+        break
